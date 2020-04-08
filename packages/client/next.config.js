@@ -4,7 +4,7 @@
  * @Author: by1773
  * @Date: 2020-03-31 17:32:55
  * @LastEditors: by1773
- * @LastEditTime: 2020-04-08 16:30:06
+ * @LastEditTime: 2020-04-08 16:41:56
  */
 const fs = require('fs');
 const path = require('path');
@@ -28,7 +28,7 @@ if (typeof require !== 'undefined') {
 const isProd = process.env.NODE_ENV === 'production';
 
 const nextConfig = {
-  assetPrefix: isProd ? 'http://139.9.1.139:3003' : '/',
+  assetPrefix: isProd ? 'http://139.9.1.139:3004' : '/',
   webpack: (config) => {
     config.resolve.plugins.push(new TsconfigPathsPlugin());
     config.plugins.push(
