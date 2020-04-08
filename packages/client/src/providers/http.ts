@@ -4,7 +4,7 @@
  * @Author: by1773
  * @Date: 2020-03-31 17:32:55
  * @LastEditors: by1773
- * @LastEditTime: 2020-04-08 15:42:27
+ * @LastEditTime: 2020-04-08 16:29:15
  */
 import axios from 'axios';
 import { message } from 'antd';
@@ -13,9 +13,9 @@ import Router from 'next/router';
 export const httpProvider = axios.create({
   baseURL:
     process.env.NODE_ENV === 'development'
-      // ? 'http://localhost:4000/api'
-      ?'http://139.9.1.139:3003/api'
-      : 'https://api.blog.wipi.tech/api',
+      ? 'http://localhost:4000/api'
+      // ?'http://139.9.1.139:3003/api'
+      : 'http://139.9.1.139:3003/api',
   timeout: 10000,
 });
 
