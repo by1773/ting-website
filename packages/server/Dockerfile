@@ -12,7 +12,7 @@ WORKDIR /var/publish/nest
 
 
 RUN npm install --registry https://registry.npm.taobao.org 
-RUN npm build
+RUN npm run  build
 # 配置系统变量，指定端口
 ENV HOST 0.0.0.0
 ENV PORT 4000
