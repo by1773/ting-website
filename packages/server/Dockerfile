@@ -11,7 +11,7 @@ ADD ./  /var/publish/nest
 WORKDIR /var/publish/nest
 
 
-RUN npm install
+RUN npm install --registry https://registry.npm.taobao.org 
 RUN npm build
 # 配置系统变量，指定端口
 ENV HOST 0.0.0.0
