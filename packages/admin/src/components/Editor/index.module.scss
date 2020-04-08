@@ -1,0 +1,27 @@
+.wrapper {
+  :global {
+    .ck-toolbar {
+      border: 0 !important;
+      background: #fff !important;
+    }
+    .ck-toolbar__separator {
+      background-color: transparent !important;
+    }
+
+    div.ck-content {
+      border-width: 0 !important;
+      box-shadow: none !important;
+      min-height: calc(100vh - 66.5px - 40px - 48px - 48px) !important;
+
+      .table {
+        width: 100%;
+      }
+    }
+  }
+
+  .stats {
+    font-size: 0.8em;
+    text-align: center;
+    color: rgba(0, 0, 0, 0.55);
+  }
+}

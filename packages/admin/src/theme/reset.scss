@@ -1,0 +1,116 @@
+::-webkit-scrollbar-track {
+  border-radius: 0;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 0;
+  background-color: #dadada;
+  transition: all 0.2s;
+  border-radius: 0.5rem;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+  background: transparent;
+}
+
+ul,
+ol {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+p {
+  margin: 0;
+}
+
+a {
+  color: inherit;
+
+  &:hover {
+    color: inherit;
+  }
+}
+
+html {
+  text-size-adjust: 100% !important;
+}
+
+body {
+  font-family: 'Nunito', 'Helvetica', Arial, sans-serif;
+  color: #5f5f6f;
+  line-height: 1.75em;
+  overflow-x: hidden;
+}
+
+:global {
+  // * {
+  //   transition: background-color 0.1s linear, margin 0.25s linear,
+  //     opacity 0.25s linear, filter 0.25s linear, visibility 0.25s linear,
+  //     transform 0.25s linear, border-color 0.25s linear;
+  // }
+
+  @media (max-width: 768px) {
+    .container {
+      width: 100%;
+      padding-left: 15px;
+      padding-right: 15px;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .container {
+      width: 768px;
+    }
+  }
+
+  @media (min-width: 992px) {
+    .container {
+      width: 970px;
+    }
+  }
+
+  @media (min-width: 1200px) {
+    .container {
+      width: 1140px;
+    }
+  }
+
+  .container {
+    margin-right: auto;
+    margin-left: auto;
+    // min-height: calc(100vh - 64px - 153px);
+  }
+
+  .ant-breadcrumb,
+  .ant-breadcrumb a {
+    color: rgba(0, 0, 0, 0.45) !important;
+  }
+
+  .ant-breadcrumb-separator {
+    color: rgba(0, 0, 0, 0.45) !important;
+  }
+
+  .ant-breadcrumb > span:last-child a {
+    color: rgba(0, 0, 0, 0.65) !important;
+  }
+
+  .ant-comment {
+    background-color: #fff;
+    padding: 0 16px 0px 4px;
+
+    + .ant-comment {
+      margin-top: 8px;
+    }
+
+    .ant-comment-inner {
+      border-bottom: 1px solid #f6f6f6;
+    }
+  }
+
+  .ant-anchor-wrapper {
+    background-color: transparent !important;
+  }
+}

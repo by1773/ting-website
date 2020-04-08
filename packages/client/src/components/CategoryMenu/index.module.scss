@@ -1,0 +1,41 @@
+@import '../../theme/var.scss';
+
+.wrapper {
+  background-color: #fff;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+
+  > div {
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+  }
+
+  ul {
+    width: 100%;
+    display: inline-flex;
+    overflow-x: auto;
+
+    &::-webkit-scrollbar {
+      display: none !important;
+    }
+  }
+
+  li {
+    display: inline-flex;
+    align-items: center;
+    font-size: 14px;
+    padding: 2px 18px;
+    white-space: nowrap;
+    border-radius: 4px;
+    border: 1px solid transparent;
+
+    + li {
+      margin-left: 1.2em;
+    }
+
+    &.active {
+      color: $feMainColor;
+      border-color: $feMainColor;
+      background-color: $feBgColor;
+    }
+  }
+}

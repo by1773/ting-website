@@ -1,0 +1,347 @@
+:global {
+  .markdown {
+    color: #5f5f6f !important;
+    background-color: #fff !important;
+    overflow: hidden !important;
+
+    > :first-child {
+      margin-top: 0;
+    }
+
+    > * + * {
+      margin-top: 1.5rem;
+    }
+
+    > ol > * + *,
+    > ul > * + * {
+      margin-top: 1rem;
+    }
+
+    hr {
+      border-width: 0 0 2px;
+      border-color: #edf2f7;
+      margin-top: 4rem;
+      margin-bottom: 4rem;
+    }
+
+    a,
+    ol li a,
+    p a,
+    ul li a,
+    a.markdown {
+      color: #4299e1;
+      text-decoration: underline;
+      font-weight: 500;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      font-weight: 700;
+      color: #303030;
+
+      > * {
+        color: inherit !important;
+      }
+    }
+
+    h1 {
+      font-size: 2rem;
+    }
+
+    h2 {
+      font-size: 1.6rem;
+    }
+
+    h3 {
+      font-size: 1.4rem;
+    }
+
+    h4,
+    h5,
+    h6 {
+      font-size: 1.2rem;
+    }
+
+    p {
+      line-height: 1.75rem;
+
+      code {
+        padding: 2px 4px;
+        font-size: 90%;
+        color: #ff0064;
+        background-color: #f9f2f4;
+        border-radius: 4px;
+      }
+    }
+
+    img {
+      max-width: 100%;
+      margin-bottom: 14px;
+    }
+
+    blockquote {
+      font-size: 14px;
+      border-left: 4px solid #ff0064;
+      padding: 12px 24px 12px 12px;
+      margin-top: 1em;
+      border-left-width: 4px;
+      border-left-style: solid;
+      background-color: #f8f8f8;
+      position: relative;
+      border-bottom-right-radius: 2px;
+      border-top-right-radius: 2px;
+
+      p {
+        margin: 0;
+      }
+    }
+
+    table {
+      width: 100%;
+      text-align: center;
+      border-collapse: collapse;
+      border-spacing: 0;
+      border: 1px solid #f4f4f4;
+      overflow: auto;
+    }
+
+    table th {
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: #4a5568;
+      padding: 0.5rem;
+      background-color: #f7fafc;
+      text-align: center;
+    }
+
+    table tr:nth-child(2n) {
+      background-color: #fcfcfc;
+    }
+
+    table td {
+      padding: 0.5rem;
+      border-top-width: 1px;
+      border-color: #edf2f7;
+      font-size: 0.875rem;
+    }
+
+    table td code {
+      background-color: #f7fafc;
+      padding-left: 0.25rem;
+      padding-right: 0.25rem;
+      font-family: Menlo, Monaco, Consolas, Liberation Mono, Courier New,
+        monospace;
+      font-size: 0.75rem;
+      color: #6b46c1;
+      vertical-align: baseline;
+    }
+
+    figure.image {
+      display: table;
+      width: 100%;
+      clear: both;
+      text-align: center;
+      border: 1px solid #f4f4f4;
+    }
+
+    figure.image-style-side {
+      max-width: 50%;
+      float: right;
+    }
+
+    figure.image p {
+      text-align: center;
+    }
+
+    figure.image p,
+    figure.image img {
+      margin: 0;
+    }
+
+    figure.image > figcaption {
+      display: table-caption;
+      caption-side: bottom;
+      word-break: break-word;
+      color: #333;
+      background-color: #f4f4f4;
+      padding: 0.6em;
+      font-size: 0.75em;
+      outline-offset: -1px;
+    }
+
+    ul,
+    ol {
+      line-height: 1.6em;
+      padding-left: 1.5em;
+
+      position: relative;
+      z-index: 1;
+    }
+
+    ul {
+      list-style: outside;
+    }
+
+    ol {
+      list-style-type: none;
+      counter-reset: item;
+      padding-left: 0;
+    }
+
+    ol > li {
+      position: relative;
+      padding-left: 2rem;
+    }
+
+    ol > li:before {
+      position: absolute;
+      top: 0;
+      left: 0;
+      margin-top: -2px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 1.5rem;
+      width: 1.5rem;
+      background-color: #e2e8f0;
+      border-radius: 9999px;
+      color: #4a5568;
+      font-size: 0.75rem;
+      font-weight: 700;
+      content: counter(item);
+      counter-increment: item;
+    }
+
+    pre::-webkit-scrollbar,
+    code::-webkit-scrollbar {
+      display: none !important;
+    }
+
+    pre {
+      position: relative;
+
+      display: block;
+      padding: 9.5px;
+      margin: 0 0 10px;
+      font-size: 13px;
+      line-height: 1.42857143;
+      color: #333;
+      word-break: break-all;
+      word-wrap: break-word;
+      background-color: #f5f5f5;
+      border: 1px solid #ccc;
+      padding: 0;
+      margin-bottom: 20px;
+      background: none;
+      border: none;
+      font-family: Menlo, Monaco, Consolas, 'Courier New', monospace;
+      border-radius: 0.5rem;
+      font-weight: 400;
+      scrollbar-width: none;
+
+      code {
+        display: block;
+        overflow-x: auto;
+        padding: 1.4em;
+        color: #333;
+        line-height: 1.45;
+        background-color: #f6f8fa;
+        border-radius: 3px;
+      }
+
+      code.language-go:before,
+      code.language-css:before,
+      code.language-sql:before,
+      code.language-php:before,
+      code.language-html:before,
+      code.language-json:before,
+      code.language-bash:before,
+      code.language-less:before,
+      code.language-scss:before,
+      code.language-nginx:before,
+      code.language-javascript:before,
+      code.language-typescript:before,
+      code.language-js:before,
+      code.language-ts:before,
+      code.language-shell:before,
+      code.language-stylus:before,
+      code.language-python:before,
+      code.language-nginx:before {
+        position: absolute;
+        top: 0;
+        right: 0;
+        color: hsla(0, 0%, 54.9%, 0.8);
+        text-align: right;
+        font-size: 0.75em;
+        padding: 4px 8px 0;
+        font-weight: 600;
+      }
+
+      code.language-go:before {
+        content: 'go';
+      }
+
+      code.language-css:before {
+        content: 'css';
+      }
+
+      code.language-sql:before {
+        content: 'sql';
+      }
+
+      code.language-php:before {
+        content: 'php';
+      }
+
+      code.language-bash:before {
+        content: 'bash';
+      }
+
+      code.language-less:before {
+        content: 'less';
+      }
+
+      code.language-scss:before {
+        content: 'scss';
+      }
+
+      code.language-shell:before {
+        content: 'shell';
+      }
+
+      code.language-nginx:before {
+        content: 'nginx';
+      }
+
+      code.language-stylus:before {
+        content: 'stylus';
+      }
+
+      code.language-python:before {
+        content: 'python';
+      }
+
+      code.language-html:before {
+        content: 'HTML';
+      }
+
+      code.language-javascript:before,
+      code.language-js:before {
+        content: 'JavaScript';
+      }
+
+      code.language-typescript:before,
+      code.language-ts:before {
+        content: 'TypeScript';
+      }
+
+      code.language-css:before {
+        content: 'css';
+      }
+    }
+  }
+}

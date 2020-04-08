@@ -1,0 +1,27 @@
+.container {
+  position: relative;
+  margin-top: 40px;
+}
+
+.meta {
+  padding-bottom: 1.5rem;
+  text-align: center;
+
+  .cover {
+    display: inline-block;
+    max-width: 100%;
+  }
+}
+
+.content {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 8px 21px;
+}
+
+@media (max-width: 768px) {
+  .content {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
