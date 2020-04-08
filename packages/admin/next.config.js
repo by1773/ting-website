@@ -1,3 +1,11 @@
+/*
+ * @Descripttion: 
+ * @version: 
+ * @Author: by1773
+ * @Date: 2020-03-31 17:32:54
+ * @LastEditors: by1773
+ * @LastEditTime: 2020-04-08 16:59:46
+ */
 const fs = require('fs');
 const path = require('path');
 const withPlugins = require('next-compose-plugins');
@@ -21,7 +29,7 @@ if (typeof require !== 'undefined') {
 const isProd = process.env.NODE_ENV === 'production';
 
 const nextConfig = {
-  assetPrefix: isProd ? 'https://cdn.admin.blog.wipi.tech' : '/',
+  assetPrefix: isProd ? 'http://139.9.1.139:3004' : '/',
   webpack: (config) => {
     config.resolve.plugins.push(new TsconfigPathsPlugin());
     config.plugins.push(
