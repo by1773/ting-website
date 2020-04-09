@@ -108,7 +108,7 @@ $height: 64px;
         line-height: 64px;
         padding: 0 16px;
         font-size: 14px;
-        
+        justify-content: center;
         &:first-of-type {
           padding-left: 0;
         }
@@ -139,10 +139,13 @@ $height: 64px;
 
         a {
           color: inherit;
-          width: 100%;
+         
           position: relative;
           color: #333;
           font-size: 1rem;
+          @media screen and (min-width: 768px) {
+            width: 100%;
+          }
         }
 
       }
