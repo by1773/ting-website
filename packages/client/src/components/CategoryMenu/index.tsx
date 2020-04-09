@@ -36,7 +36,7 @@ export const CategoryMenu = ({ categories = [] }) => {
                   routerCategory === t.value ? style.active : false
                 )}
               >
-                <Link href="/[category]" as={`/` + t.value} shallow={false}>
+                <Link href="/content/[category]" as={`/content/` + t.value} shallow={false}>
                   <a>
                     <span>{t.label}</span>
                   </a>

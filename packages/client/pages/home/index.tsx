@@ -38,6 +38,8 @@ const ArchiveItem = ({ month, articles = [] }) => {
 const Archives: NextPage<IProps> = props => {
   const { articles = [], tags = [] } = props as any;
   // let map = new MapProvider('map')
+  console.log('style',style);
+  
   return (
     <div className={style.wrapper}>
       <div className={style.index_background}>
@@ -48,12 +50,12 @@ const Archives: NextPage<IProps> = props => {
           <div>
           <img src="/static/images/home_bg_02.jpg" alt=""/>
           </div>
-          <div>
+          {/* <div>
           <img src="/static/images/home_bg_02.jpg" alt=""/>
           </div>
           <div>
           <img src="/static/images/home_bg_01.jpg" alt=""/>
-          </div>
+          </div> */}
         </Carousel>
       </div>
       <div className={cls('container', style.container)}>

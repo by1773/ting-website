@@ -7,7 +7,7 @@ import { Footer } from '@components/Footer';
 const defaultMenus = [
   {
     label: '首页',
-    path: '/home',
+    path: '/',
     // dynamicPath: '/[tag]',
   },
 
@@ -17,7 +17,7 @@ const defaultMenus = [
   },
   {
     label: '文章',
-    path: '/',
+    path: '/content',
     dynamicPath: '/[tag]',
   },
   // {
@@ -54,6 +54,7 @@ export const Layout: React.FC<Iprops> = ({
         <meta name="keyword" content={setting.seoKeyword} />
         <meta name="description" content={setting.seoDesc} />
         <link rel="shortcut icon" href={setting.systemFavicon} />
+        <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0"></meta>
         <link
           href="//fonts.googleapis.com/css?family=Nunito:400,400i,700,700i&amp;display=swap"
           rel="stylesheet"
