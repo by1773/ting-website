@@ -1,5 +1,5 @@
 # 引用镜像
-FROM node:latest
+FROM node:10.15.0
 # 作者 wohsi hnjdshnjn
 MAINTAINER yb
 
@@ -10,7 +10,7 @@ ADD ./  /admin
 # 执行镜像的工作目录
 WORKDIR /admin
 
-
+RUN npm cache clean
 RUN npm install --registry https://registry.npm.taobao.org 
 RUN npm run build
 # 配置系统变量，指定端口

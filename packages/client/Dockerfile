@@ -1,5 +1,5 @@
 # 引用镜像
-FROM node:latest
+FROM node:10.15.0
 # 作者 wohsi hnjdshnjn
 MAINTAINER yb
 
@@ -10,8 +10,10 @@ ADD ./  /client
 # 执行镜像的工作目录
 WORKDIR /client
 
-
-RUN npm install --registry https://registry.npm.taobao.org 
+RUN npm cache clean --force
+RUN npm install -g cnpm   --registry https://registry.npm.taobao.org 
+RUN cnpm -v
+RUN cnpm install
 RUN npm run build
 # 配置系统变量，指定端口
 ENV HOST 0.0.0.0
