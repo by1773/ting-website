@@ -14,7 +14,7 @@ export const httpProvider = axios.create({
   baseURL:
     process.env.NODE_ENV === 'development'
       ? 'http://localhost:4000/api'
-      : 'http://119.3.166.111/:3000/api',
+      : 'http://localhost/:3000/api',
   timeout: 20000,
 });
 

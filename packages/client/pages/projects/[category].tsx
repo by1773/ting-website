@@ -4,27 +4,29 @@ import cls from 'classnames';
 import InfiniteScroll from 'react-infinite-scroller';
 import { ArticleProvider } from '@providers/article';
 import { CategoryMenu } from '@components/CategoryMenu';
-import { ArticleList } from '@components/ArticleList';
+import { ProjectList } from '@components/ProjectList';
 import { RecommendArticles } from '@components/RecommendArticles';
 import { Tags } from '@components/Tags';
 import { Footer } from '@components/Footer';
 import style from './index.module.scss';
 
-interface IHomeProps {
+interface IProps {
   articles: IArticle[];
   total: number;
+  category: string;
 }
 
 const pageSize = 12;
 
-const Home: NextPage<IHomeProps> = props => {
+const Home: NextPage<IProps> = props => {
   const {
     articles: defaultArticles = [],
-    total = 0,
+    total,
+    category,
     setting = {},
-    categories = [],
     tags = [],
-    scope=0,
+    categories = [],
+    scope=1
   } = props as any;
   const [affix, setAffix] = useState(false);
   const [page, setPage] = useState(1);
@@ -48,7 +50,7 @@ const Home: NextPage<IHomeProps> = props => {
   }, [defaultArticles]);
 
   const getArticles = useCallback(page => {
-    ArticleProvider.getArticles({
+    ArticleProvider.getArticlesByCategory(category, {
       page,
       pageSize,
       status: 'publish',
@@ -60,7 +62,7 @@ const Home: NextPage<IHomeProps> = props => {
 
   return (
     <div className={style.wrapper}>
-      <CategoryMenu categories={categories} scope={scope}/>
+      <CategoryMenu categories={categories} scope={scope} />
       <div className={cls('container', style.container)}>
         <div className={style.content}>
           <InfiniteScroll
@@ -73,16 +75,15 @@ const Home: NextPage<IHomeProps> = props => {
               </div>
             }
           >
-            <ArticleList articles={articles} />
+            <ProjectList articles={articles} />
           </InfiniteScroll>
-
-          <aside className={cls(style.aside)}>
+          {/* <aside className={cls(style.aside)}>
             <div className={cls(affix ? style.isFixed : false)}>
               <RecommendArticles mode="inline" />
               <Tags tags={tags} />
               <Footer className={style.footer} setting={setting} />
             </div>
-          </aside>
+          </aside> */}
         </div>
       </div>
     </div>
@@ -90,11 +91,21 @@ const Home: NextPage<IHomeProps> = props => {
 };
 
 // 服务端预取数据
-Home.getInitialProps = async () => {
+Home.getInitialProps = async ctx => {
+  const { category } = ctx.query;
   const [articles] = await Promise.all([
-    ArticleProvider.getArticles({ page: 1, pageSize, status: 'publish' }),
+    ArticleProvider.getArticlesByCategory(category, {
+      page: 1,
+      pageSize: 8,
+      status: 'publish',
+    }),
   ]);
-  return { articles: articles[0], total: articles[1], needLayoutFooter: false };
+  return {
+    articles: articles[0],
+    total: articles[1],
+    category: '' + category,
+    needLayoutFooter: false,
+  };
 };
 
 export default Home;

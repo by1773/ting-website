@@ -1,11 +1,12 @@
 import React, { useState, useCallback, useMemo } from 'react';
 import { NextPage } from 'next';
-import { Row, Col, Card, Button, Input, Popconfirm, Form, message } from 'antd';
+import { Row, Col, Card, Button, Input, Popconfirm, Form, message, Select } from 'antd';
 import cls from 'classnames';
 import { AdminLayout } from '@/layout/AdminLayout';
 import { CategoryProvider } from '@providers/category';
 import style from './index.module.scss';
 
+const { Option } = Select
 interface IProps {
   data: ICategory[];
 }
@@ -14,6 +15,7 @@ const Page: NextPage<IProps> = ({ data: defaultData = [] }) => {
   const [data, setData] = useState(defaultData);
   const [mode, setMode] = useState('create');
   const [current, setCurrent] = useState(null);
+  const [scope, setScope] = useState(null)
   const [label, setLabel] = useState(null);
   const [value, setValue] = useState(null);
 
@@ -28,6 +30,7 @@ const Page: NextPage<IProps> = ({ data: defaultData = [] }) => {
   const reset = useCallback(() => {
     setMode('create');
     setCurrent(null);
+    setScope(null)
     setLabel(null);
     setValue(null);
   }, []);
@@ -67,8 +70,26 @@ const Page: NextPage<IProps> = ({ data: defaultData = [] }) => {
   return (
     <AdminLayout>
       <Row gutter={16} className={style.wrapper}>
-        <Col xs={24} sm={24} md={9}>
+        <Col xs={24} sm={24} md={10}>
           <Card title={isCreateMode ? '添加分类' : '管理分类'} bordered={true}>
+            {/* 
+            作用类别-区分文章还是项目展示用
+             */}
+            <Form.Item >
+              <Select
+                value={scope}
+              style={{width:'100%'}}
+                placeholder="输入作用范围"
+                onChange={(e) => {
+                  // console.log(e);
+                  setScope(e)
+                }}
+                allowClear
+              >
+                <Option value="0">文章</Option>
+                <Option value="1">项目</Option>
+              </Select>
+            </Form.Item>
             <Form.Item>
               <Input
                 value={label}
@@ -91,45 +112,47 @@ const Page: NextPage<IProps> = ({ data: defaultData = [] }) => {
               className={cls(style.btns, isCreateMode ? false : style.isEdit)}
             >
               {isCreateMode ? (
-                <Button type="primary" onClick={() => addTag({ label, value })}>
+                <Button type="primary" onClick={() => addTag({ label, value ,scope})}>
                   保存
                 </Button>
               ) : (
-                <>
-                  <Button.Group>
-                    <Button
-                      type="primary"
-                      onClick={() =>
-                        updateTag(current.id, {
-                          label,
-                          value,
-                        })
-                      }
+                  <>
+                    <Button.Group>
+                      <Button
+                        type="primary"
+                        onClick={() =>
+                          updateTag(current.id, {
+                            label,
+                            value,
+                            scope
+                          })
+                        }
+                      >
+                        更新
+                    </Button>
+                      <Button type="dashed" onClick={() => reset()}>
+                        返回添加
+                    </Button>
+                    </Button.Group>
+                    <Popconfirm
+                      title="确认删除这个分类？"
+                      onConfirm={() => deleteTag(current.id)}
+                      okText="确认"
+                      cancelText="取消"
                     >
-                      更新
-                    </Button>
-                    <Button type="dashed" onClick={() => reset()}>
-                      返回添加
-                    </Button>
-                  </Button.Group>
-                  <Popconfirm
-                    title="确认删除这个分类？"
-                    onConfirm={() => deleteTag(current.id)}
-                    okText="确认"
-                    cancelText="取消"
-                  >
-                    <Button type="danger">删除</Button>
-                  </Popconfirm>
-                </>
-              )}
+                      <Button type="danger">删除</Button>
+                    </Popconfirm>
+                  </>
+                )}
             </div>
           </Card>
         </Col>
-        <Col xs={24} sm={24} md={15}>
-          <Card title="所有分类" bordered={true}>
+        {/* 文章分类 */}
+        <Col xs={24} sm={24} md={7}>
+          <Card title="文章分类" bordered={true}>
             <ul className={style.list}>
               {data.map(d => (
-                <li
+               d && d.scope=='0'? <li
                   key={d.id}
                   className={cls(style.item)}
                   onClick={() => {
@@ -137,12 +160,37 @@ const Page: NextPage<IProps> = ({ data: defaultData = [] }) => {
                     setCurrent(d);
                     setLabel(d.label);
                     setValue(d.value);
+                    setScope(d.scope)
                   }}
                 >
                   <a key={d.id} className={style.tag}>
                     <span>{d.label}</span>
                   </a>
-                </li>
+                </li>:null
+              ))}
+            </ul>
+          </Card>
+        </Col>
+         {/* 项目分类 */}
+         <Col xs={24} sm={24} md={7}>
+          <Card title="项目分类" bordered={true}>
+            <ul className={style.list}>
+              {data.map(d => (
+                  d && d.scope=='1'? <li
+                  key={d.id}
+                  className={cls(style.item)}
+                  onClick={() => {
+                    setMode('edit');
+                    setCurrent(d);
+                    setLabel(d.label);
+                    setValue(d.value);
+                    setScope(d.scope)
+                  }}
+                >
+                  <a key={d.id} className={style.tag}>
+                    <span>{d.label}</span>
+                  </a>
+                </li>:null
               ))}
             </ul>
           </Card>

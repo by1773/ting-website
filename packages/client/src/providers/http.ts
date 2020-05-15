@@ -4,7 +4,7 @@
  * @Author: by1773
  * @Date: 2020-03-31 17:32:55
  * @LastEditors: by1773
- * @LastEditTime: 2020-04-15 16:19:20
+ * @LastEditTime: 2020-05-15 10:03:11
  */
 import axios from 'axios';
 import { message } from 'antd';
@@ -14,8 +14,8 @@ export const httpProvider = axios.create({
   baseURL:
     process.env.NODE_ENV === 'development'
       // ? 'http://localhost:4000/api'
-      ?'http://119.3.166.111:3000/api'
-      : 'http://119.3.166.111:3000/api',
+      ?'http://localhost:4000/api'
+      : 'http://localhost:4000/api',
   timeout: 10000,
 });
 

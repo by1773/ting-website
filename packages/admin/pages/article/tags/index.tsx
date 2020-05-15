@@ -10,12 +10,13 @@ import {
   List,
   Form,
   message,
+  Select
 } from 'antd';
 import cls from 'classnames';
 import { AdminLayout } from '@/layout/AdminLayout';
 import { TagProvider } from '@providers/tag';
 import style from './index.module.scss';
-
+const { Option } = Select
 interface ITagProps {
   tags: ITag[];
 }
@@ -24,6 +25,7 @@ const TagPage: NextPage<ITagProps> = ({ tags: defaultTags = [] }) => {
   const [tags, setTags] = useState(defaultTags);
   const [mode, setMode] = useState('create');
   const [currentTag, setCurrentTag] = useState(null);
+  const [scope, setScope] = useState(null)
   const [label, setLabel] = useState(null);
   const [value, setValue] = useState(null);
 
@@ -38,6 +40,7 @@ const TagPage: NextPage<ITagProps> = ({ tags: defaultTags = [] }) => {
   const reset = useCallback(() => {
     setMode('create');
     setCurrentTag(null);
+    setScope(null);
     setLabel(null);
     setValue(null);
   }, []);
@@ -79,6 +82,24 @@ const TagPage: NextPage<ITagProps> = ({ tags: defaultTags = [] }) => {
       <Row gutter={16} className={style.wrapper}>
         <Col xs={24} sm={24} md={9}>
           <Card title={isCreateMode ? '添加标签' : '管理标签'} bordered={true}>
+            {/* 
+            作用类别-区分文章还是项目展示用
+             */}
+            <Form.Item >
+              <Select
+                value={scope}
+                style={{ width: '100%' }}
+                placeholder="输入作用范围"
+                onChange={(e) => {
+                  // console.log(e);
+                  setScope(e)
+                }}
+                allowClear
+              >
+                <Option value="0">文章</Option>
+                <Option value="1">项目</Option>
+              </Select>
+            </Form.Item>
             <Form.Item>
               <Input
                 value={label}
@@ -101,42 +122,91 @@ const TagPage: NextPage<ITagProps> = ({ tags: defaultTags = [] }) => {
               className={cls(style.btns, isCreateMode ? false : style.isEdit)}
             >
               {isCreateMode ? (
-                <Button type="primary" onClick={() => addTag({ label, value })}>
+                <Button type="primary" onClick={() => addTag({ label, value ,scope})}>
                   保存
                 </Button>
               ) : (
-                <>
-                  <Button.Group>
-                    <Button
-                      type="primary"
-                      onClick={() =>
-                        updateTag(currentTag.id, {
-                          label,
-                          value,
-                        })
-                      }
+                  <>
+                    <Button.Group>
+                      <Button
+                        type="primary"
+                        onClick={() =>
+                          updateTag(currentTag.id, {
+                            label,
+                            value,
+                            scope
+                          })
+                        }
+                      >
+                        更新
+                    </Button>
+                      <Button type="dashed" onClick={() => reset()}>
+                        返回添加
+                    </Button>
+                    </Button.Group>
+                    <Popconfirm
+                      title="确认删除这个标签？"
+                      onConfirm={() => deleteTag(currentTag.id)}
+                      okText="确认"
+                      cancelText="取消"
                     >
-                      更新
-                    </Button>
-                    <Button type="dashed" onClick={() => reset()}>
-                      返回添加
-                    </Button>
-                  </Button.Group>
-                  <Popconfirm
-                    title="确认删除这个标签？"
-                    onConfirm={() => deleteTag(currentTag.id)}
-                    okText="确认"
-                    cancelText="取消"
-                  >
-                    <Button type="danger">删除</Button>
-                  </Popconfirm>
-                </>
-              )}
+                      <Button type="danger">删除</Button>
+                    </Popconfirm>
+                  </>
+                )}
             </div>
           </Card>
         </Col>
         <Col xs={24} sm={24} md={15}>
-          <Card title="所有标签" bordered={true}>
+          {/* 文章标签 */}
+        <Col xs={24} sm={24} md={7}>
+          <Card title="文章标签" bordered={true}>
+            <ul className={style.list}>
+              {tags.map(d => (
+               d && d.scope=='0'? <li
+                  key={d.id}
+                  className={cls(style.item)}
+                  onClick={() => {
+                    setMode('edit');
+                    setCurrentTag(d);
+                    setLabel(d.label);
+                    setValue(d.value);
+                    setScope(d.scope)
+                  }}
+                >
+                  <a key={d.id} className={style.tag}>
+                    <span>{d.label}</span>
+                  </a>
+                </li>:null
+              ))}
+            </ul>
+          </Card>
+        </Col>
+         {/* 项目标签 */}
+         <Col xs={24} sm={24} md={7}>
+          <Card title="项目标签" bordered={true}>
+            <ul className={style.list}>
+              {tags.map(d => (
+                  d && d.scope=='1'? <li
+                  key={d.id}
+                  className={cls(style.item)}
+                  onClick={() => {
+                    setMode('edit');
+                    setCurrentTag(d);
+                    setLabel(d.label);
+                    setValue(d.value);
+                    setScope(d.scope)
+                  }}
+                >
+                  <a key={d.id} className={style.tag}>
+                    <span>{d.label}</span>
+                  </a>
+                </li>:null
+              ))}
+            </ul>
+          </Card>
+        </Col>
+          {/* <Card title="所有标签" bordered={true}>
             <ul className={style.list}>
               {tags.map(d => (
                 <li
@@ -155,7 +225,7 @@ const TagPage: NextPage<ITagProps> = ({ tags: defaultTags = [] }) => {
                 </li>
               ))}
             </ul>
-          </Card>
+          </Card> */}
         </Col>
       </Row>
     </AdminLayout>

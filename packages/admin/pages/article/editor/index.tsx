@@ -20,7 +20,7 @@ const Editor: NextPage = () => {
 
   const save = useCallback(() => {
     if (!article.title) {
-      message.warn('至少输入文章标题');
+      message.warn('至少输入标题');
       return;
     }
 
@@ -37,12 +37,12 @@ const Editor: NextPage = () => {
     if (id) {
       return ArticleProvider.updateArticle(id, article).then(res => {
         setId(res.id);
-        message.success('文章已保存为草稿');
+        message.success('已保存为草稿');
       });
     } else {
       return ArticleProvider.addArticle(article).then(res => {
         setId(res.id);
-        message.success('文章已保存为草稿');
+        message.success('已保存为草稿');
       });
     }
   }, [article, id]);
@@ -58,8 +58,8 @@ const Editor: NextPage = () => {
   const publish = useCallback(() => {
     let canPublish = true;
     void [
-      ['title', '请输入文章标题'],
-      ['content', '请输入文章内容'],
+      ['title', '请输入标题'],
+      ['content', '请输入内容'],
     ].forEach(([key, msg]) => {
       if (!article[key]) {
         message.warn(msg);
@@ -80,7 +80,7 @@ const Editor: NextPage = () => {
     const handle = res => {
       setId(res.id);
       message.success(
-        data.status === 'draft' ? '文章已保存为草稿' : '文章已发布'
+        data.status === 'draft' ? '已保存为草稿' : '已发布'
       );
     };
 
@@ -94,7 +94,7 @@ const Editor: NextPage = () => {
   return (
     <div className={style.wrapper}>
       <Helmet>
-        <title>新建文章</title>
+        <title>新建文章/项目</title>
       </Helmet>
       <header className={style.header}>
         <PageHeader
@@ -105,7 +105,7 @@ const Editor: NextPage = () => {
           onBack={() => window.close()}
           title={
             <Input
-              placeholder="请输入文章标题"
+              placeholder="请输入标题"
               defaultValue={article.title}
               onChange={e => {
                 const value = e.target.value;

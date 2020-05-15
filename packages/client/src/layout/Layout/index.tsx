@@ -20,10 +20,10 @@ const defaultMenus = [
     path: '/content',
     dynamicPath: '/[tag]',
   },
-  // {
-  //   label: '其它',
-  //   path: '/others',
-  // },
+  {
+    label: '项目',
+    path: '/projects',
+  },
 ];
 
 interface Iprops {

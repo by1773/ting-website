@@ -26,6 +26,7 @@ const Home: NextPage<IProps> = props => {
     setting = {},
     tags = [],
     categories = [],
+    scope=0
   } = props as any;
   const [affix, setAffix] = useState(false);
   const [page, setPage] = useState(1);
@@ -61,7 +62,7 @@ const Home: NextPage<IProps> = props => {
 
   return (
     <div className={style.wrapper}>
-      <CategoryMenu categories={categories} />
+      <CategoryMenu categories={categories} scope={scope} />
       <div className={cls('container', style.container)}>
         <div className={style.content}>
           <InfiniteScroll

@@ -1,3 +1,11 @@
+/*
+ * @Descripttion: 
+ * @version: 
+ * @Author: by1773
+ * @Date: 2020-03-31 17:32:55
+ * @LastEditors: by1773
+ * @LastEditTime: 2020-05-15 11:30:40
+ */
 import {
   Entity,
   PrimaryGeneratedColumn,
@@ -13,7 +21,8 @@ import { Article } from '../article/article.entity';
 export class Tag {
   @PrimaryGeneratedColumn('uuid')
   id: string;
-
+  @Column()
+  scope: string;
   @Column()
   label: string;
 

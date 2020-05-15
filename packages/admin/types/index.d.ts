@@ -16,6 +16,9 @@ interface IFile {
 }
 
 interface IArticle {
+  scope:string; //文章还是项目
+  codeUrl:string;//项目代码地址
+  viewUrl:string;//预览地址
   id: string;
   title: string;
   summary: string;
@@ -38,11 +41,13 @@ interface ITag {
   id: string;
   label: string;
   value: string;
+  scope:string
 }
 
 interface ICategory {
   id: string;
   label: string;
+  scope:string,
   value: string;
 }
 

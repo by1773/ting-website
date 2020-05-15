@@ -4,7 +4,7 @@ import cls from 'classnames';
 import InfiniteScroll from 'react-infinite-scroller';
 import { ArticleProvider } from '@providers/article';
 import { CategoryMenu } from '@components/CategoryMenu';
-import { ArticleList } from '@components/ArticleList';
+import { ProjectList } from '@components/ProjectList';
 import { RecommendArticles } from '@components/RecommendArticles';
 import { Tags } from '@components/Tags';
 import { Footer } from '@components/Footer';
@@ -24,7 +24,7 @@ const Home: NextPage<IHomeProps> = props => {
     setting = {},
     categories = [],
     tags = [],
-    scope=0,
+    scope = 1,
   } = props as any;
   const [affix, setAffix] = useState(false);
   const [page, setPage] = useState(1);
@@ -73,16 +73,17 @@ const Home: NextPage<IHomeProps> = props => {
               </div>
             }
           >
-            <ArticleList articles={articles} />
+            <ProjectList articles={articles} />
           </InfiniteScroll>
 
-          <aside className={cls(style.aside)}>
+          {/* <aside className={cls(style.aside)}>
+            9999
             <div className={cls(affix ? style.isFixed : false)}>
               <RecommendArticles mode="inline" />
               <Tags tags={tags} />
               <Footer className={style.footer} setting={setting} />
             </div>
-          </aside>
+          </aside> */}
         </div>
       </div>
     </div>
@@ -94,6 +95,8 @@ Home.getInitialProps = async () => {
   const [articles] = await Promise.all([
     ArticleProvider.getArticles({ page: 1, pageSize, status: 'publish' }),
   ]);
+  console.log('=================',articles);
+  
   return { articles: articles[0], total: articles[1], needLayoutFooter: false };
 };
 
