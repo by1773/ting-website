@@ -16,13 +16,45 @@ interface IFile {
 }
 
 interface IArticle {
-  scope:string; //文章还是项目
+  // scope:string; //文章还是项目 0  1
+  // codeUrl:string;//项目代码地址
+  // viewUrl:string;//预览地址
+  id: string;
+  // ---
   codeUrl:string;//项目代码地址
   viewUrl:string;//预览地址
-  id: string;
+  date:string;  //项目时间
+  scale:string; //项目规模
+// --
   title: string;
   summary: string;
   content: string;
+  tags?: [any];
+  cover?: string;
+  toc: string;
+  views: number;
+  category: any;
+  status: string;
+  password?: string; // 访问密码
+  needPassword: boolean;
+  isCommentable?: boolean; // 是否可评论
+  createAt: string;
+  updateAt: string;
+  publishAt: string;
+}
+// 新增项目实体
+interface IProject {
+  // scope:string; //文章还是项目
+  codeUrl:string;//项目代码地址
+  viewUrl:string;//预览地址
+  date:string;  //项目时间
+  scale:string; //项目规模
+
+  // ---------
+  id: string;
+  title: string;  //项目名称
+  summary: string; //项目摘要
+  content: string; //项目详解
   tags?: [any];
   cover?: string;
   toc: string;

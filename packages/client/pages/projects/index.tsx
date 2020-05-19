@@ -2,7 +2,7 @@ import React, { useState, useCallback, useEffect } from 'react';
 import { NextPage } from 'next';
 import cls from 'classnames';
 import InfiniteScroll from 'react-infinite-scroller';
-import { ArticleProvider } from '@providers/article';
+import { ProjectProvider } from '@providers/project';
 import { CategoryMenu } from '@components/CategoryMenu';
 import { ProjectList } from '@components/ProjectList';
 import { RecommendArticles } from '@components/RecommendArticles';
@@ -48,7 +48,7 @@ const Home: NextPage<IHomeProps> = props => {
   }, [defaultArticles]);
 
   const getArticles = useCallback(page => {
-    ArticleProvider.getArticles({
+    ProjectProvider.getArticles({
       page,
       pageSize,
       status: 'publish',
@@ -69,7 +69,7 @@ const Home: NextPage<IHomeProps> = props => {
             hasMore={page * pageSize < total}
             loader={
               <div className={style.loading} key={0}>
-                正在获取文章...
+                正在获取项目...
               </div>
             }
           >
@@ -93,7 +93,7 @@ const Home: NextPage<IHomeProps> = props => {
 // 服务端预取数据
 Home.getInitialProps = async () => {
   const [articles] = await Promise.all([
-    ArticleProvider.getArticles({ page: 1, pageSize, status: 'publish' }),
+    ProjectProvider.getArticles({ page: 1, pageSize, status: 'publish' }),
   ]);
   console.log('=================',articles);
   

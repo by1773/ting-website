@@ -4,7 +4,7 @@
  * @Author: by1773
  * @Date: 2020-03-31 17:32:55
  * @LastEditors: by1773
- * @LastEditTime: 2020-04-07 15:28:49
+ * @LastEditTime: 2020-05-19 09:45:59
  */
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -46,6 +46,9 @@ import { SearchModule } from './modules/search/search.module';
 import { TestModule} from './modules/test/page.module'
 // 配置文件
 import { config } from './config';
+// 项目管理
+import { Project } from './modules/project/project.entity';
+import { ProjectModule } from './modules/project/project.module';
 
 @Module({
   imports: [
@@ -58,6 +61,7 @@ import { config } from './config';
         File,
         Tag,
         Article,
+        Project,
         Category,
         Comment,
         Setting,
@@ -72,6 +76,7 @@ import { config } from './config';
     FileModule,
     TagModule,
     ArticleModule,
+    ProjectModule,
     CategoryModule,
     CommentModule,
     SettingModule,

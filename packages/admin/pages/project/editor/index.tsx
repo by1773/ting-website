@@ -6,7 +6,7 @@ import { Button, Input, message, PageHeader } from 'antd';
 import { Editor as CKEditor } from '@components/Editor';
 import { FileSelectDrawer } from '@/components/FileSelectDrawer';
 import { ArticleSettingDrawer } from '@/components/ArticleSettingDrawer';
-import { ArticleProvider } from '@providers/article';
+import { ProjectProvider } from '@providers/project';
 import { useSetting } from '@/hooks/useSetting';
 import style from './index.module.scss';
 const url = require('url');
@@ -20,7 +20,7 @@ const Editor: NextPage = () => {
 
   const save = useCallback(() => {
     if (!article.title) {
-      message.warn('至少输入标题');
+      message.warn('至少输入项目名称');
       return;
     }
 
@@ -35,12 +35,12 @@ const Editor: NextPage = () => {
     }
 
     if (id) {
-      return ArticleProvider.updateArticle(id, article).then(res => {
+      return ProjectProvider.updateArticle(id, article).then(res => {
         setId(res.id);
         message.success('已保存为草稿');
       });
     } else {
-      return ArticleProvider.addArticle(article).then(res => {
+      return ProjectProvider.addArticle(article).then(res => {
         setId(res.id);
         message.success('已保存为草稿');
       });
@@ -84,17 +84,18 @@ const Editor: NextPage = () => {
       );
     };
 
+
     if (id) {
-      ArticleProvider.updateArticle(id, data).then(handle);
+      ProjectProvider.updateArticle(id, data).then(handle);
     } else {
-      ArticleProvider.addArticle(data).then(handle);
+      ProjectProvider.addArticle(data).then(handle);
     }
   };
 
   return (
     <div className={style.wrapper}>
       <Helmet>
-        <title>新建文章/项目</title>
+        <title>新建项目</title>
       </Helmet>
       <header className={style.header}>
         <PageHeader
@@ -105,7 +106,7 @@ const Editor: NextPage = () => {
           onBack={() => window.close()}
           title={
             <Input
-              placeholder="请输入标题"
+              placeholder="请输入项目名称"
               defaultValue={article.title}
               onChange={e => {
                 const value = e.target.value;
@@ -155,7 +156,7 @@ const Editor: NextPage = () => {
         }}
       />
       <ArticleSettingDrawer
-        type={`0`}
+        type={`1`}
         visible={settingDrawerVisible}
         onClose={() => setSettingDrawerVisible(false)}
         onChange={saveOrPublish}

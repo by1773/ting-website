@@ -24,6 +24,13 @@ const ResourceCreate = () => {
         </Link>
       </Menu.Item>
       <Menu.Item>
+        <Link href={'/project/editor'}>
+          <a target="_blank">
+            <span>新建项目</span>
+          </a>
+        </Link>
+      </Menu.Item>
+      <Menu.Item>
         <Link href={'/page/editor'}>
           <a target="_blank">
             <span>新建页面</span>

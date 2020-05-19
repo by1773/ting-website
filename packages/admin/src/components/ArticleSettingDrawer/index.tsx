@@ -8,6 +8,8 @@ import style from './index.module.scss';
 interface IProps {
   visible: boolean;
   article?: IArticle;
+  // project?:IProject;
+  type:string;
   onClose: () => void;
   onChange?: (arg: any) => void;
 }
@@ -23,6 +25,7 @@ const FormItem = ({ label, content }) => {
 
 export const ArticleSettingDrawer: React.FC<IProps> = ({
   article = {},
+  type,
   visible,
   onClose,
   onChange,
@@ -32,6 +35,12 @@ export const ArticleSettingDrawer: React.FC<IProps> = ({
   const [categorys, setCategorys] = useState<Array<ICategory>>([]);
   const [tags, setTags] = useState<Array<ITag>>([]);
   const [password, setPassWord] = useState(article.password || null);
+  // 新增的字段
+  const [codeUrl, setCodeUrl] = useState(article.codeUrl || null);
+  const [viewUrl, setViewUrl] = useState(article.viewUrl || null);
+  const [date, setDate] = useState(article.date || null);
+  const [scale, setScale] = useState(article.scale || null);
+  // 新增的字段结束
   const [isCommentable, setCommentable] = useState(
     article.isCommentable || true
   );
@@ -49,11 +58,28 @@ export const ArticleSettingDrawer: React.FC<IProps> = ({
     setSelectedCategory((article.category && article.category.id) || null);
     setSelectedTags((article.tags && article.tags.map(tag => tag.id)) || []);
     setCover(article.cover || null);
-  }, [article.isCommentable, article.category, article.tags, article.cover]);
+    // ---
+    setCodeUrl(article.codeUrl),
+    setViewUrl(article.viewUrl),
+    setDate(article.date),
+    setScale(article.scale)
+  }, [article.isCommentable, article.category, article.tags, article.cover,
+    article.codeUrl,
+    article.viewUrl,
+    article.date,
+    article.scale
+  ]);
 
   useEffect(() => {
-    CategoryProvider.getCategory().then(res => setCategorys(res));
-    TagProvider.getTags().then(tags => setTags(tags));
+    CategoryProvider.getCategory().then(
+      res => {
+      const temp =  res.filter((e)=>e.scope == type.toString())
+        setCategorys(temp)
+      });
+    TagProvider.getTags().then(tags => {
+      const temp =  tags.filter((e)=>e.scope == type.toString())
+      setTags(tags)
+    });
   }, []);
 
   const save = () => {
@@ -65,6 +91,10 @@ export const ArticleSettingDrawer: React.FC<IProps> = ({
       tags: selectedTags.join(','),
       cover,
       status: 'draft',
+      codeUrl,//项目代码地址
+      viewUrl,//预览地址
+      date,  //项目时间
+      scale, //项目规模
     });
   };
 
@@ -77,6 +107,10 @@ export const ArticleSettingDrawer: React.FC<IProps> = ({
       category: selectedCategory,
       cover,
       status: 'publish',
+      codeUrl,//项目代码地址
+      viewUrl,//预览地址
+      date,  //项目时间
+      scale, //项目规模
     });
   };
 
@@ -84,17 +118,19 @@ export const ArticleSettingDrawer: React.FC<IProps> = ({
     <Drawer
       width={480}
       placement="right"
-      title={'文章设置'}
+      title={type=='0'?'文章设置':'项目设置'}
       closable={true}
       onClose={onClose}
       visible={visible}
     >
       <FormItem
-        label="文章摘要"
+        // label="文章摘要"
+        label={type=='0'?'文章摘要':'项目摘要'}
         content={
           <Input.TextArea
             className={style.formItem}
-            placeholder="请输入文章摘要"
+            // placeholder="请输入文章摘要"
+            placeholder={type=='0'?'请输入文章摘要':'请输入项目摘要'}
             autoSize={{ minRows: 6, maxRows: 8 }}
             value={summary}
             onChange={e => {
@@ -103,6 +139,58 @@ export const ArticleSettingDrawer: React.FC<IProps> = ({
           />
         }
       />
+      {
+        type=='1'?<>
+          <FormItem
+          label="预览地址"
+          content={
+            <Input
+              value={viewUrl}
+              onChange={e => {
+                setViewUrl(e.target.value);
+              }}
+              placeholder="输入预览地址"
+            />
+          }
+        />
+        <FormItem
+        label="代码地址"
+        content={
+          <Input
+            value={codeUrl}
+            onChange={e => {
+              setCodeUrl(e.target.value);
+            }}
+            placeholder="输入代码地址"
+          />
+        }
+      />
+      <FormItem
+      label="项目规模"
+      content={
+        <Input
+          value={scale}
+          onChange={e => {
+            setScale(e.target.value);
+          }}
+          placeholder="输入项目规模"
+        />
+      }
+    />
+    <FormItem
+    label="项目时间"
+    content={
+      <Input
+        value={date}
+        onChange={e => {
+          setDate(e.target.value);
+        }}
+        placeholder="输入项目时间"
+      />
+    }
+  />
+        </>:null
+      }
       <FormItem
         label="访问密码"
         content={
@@ -154,7 +242,8 @@ export const ArticleSettingDrawer: React.FC<IProps> = ({
         }
       />
       <FormItem
-        label="文章封面"
+        // label="文章封面"
+        label={type=='0'?'文章封面':'项目封面'}
         content={
           <div className={style.cover}>
             <div onClick={() => setFileVisible(true)} className={style.preview}>

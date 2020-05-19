@@ -25,6 +25,25 @@ export const menus = [
     ignore: true,
   },
   {
+    icon: 'form',
+    label: '所有项目',
+    title: '所有项目',
+    path: '/project',
+  },
+  {
+    label: '新建项目',
+    path: '/project/editor',
+    ignore: true,
+  },
+  {
+    label: '编辑项目',
+    path: '/project/editor/[id]',
+    ignore: true,
+  },
+  {
+    divider: true,
+  },
+  {
     icon: 'copy',
     label: '分类管理',
     title: '分类管理',
