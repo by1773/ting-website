@@ -21,7 +21,7 @@
     "echarts-for-react": "^2.0.15-beta.1",
     "highlight.js": "^9.18.1",
     "mime-types": "^2.1.26",
-    "next": "9.2.1",
+    "next": "9.3.2",
     "next-page-transitions": "^1.0.0-beta.2",
     "nprogress": "^0.2.0",
     "ol": "^6.2.1",
