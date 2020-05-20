@@ -4,7 +4,7 @@
  * @Author: by1773
  * @Date: 2020-05-19 09:33:53
  * @LastEditors: by1773
- * @LastEditTime: 2020-05-19 11:30:37
+ * @LastEditTime: 2020-05-19 17:32:21
  */ 
 import {
   Entity,
@@ -21,7 +21,7 @@ import { Category } from '../category/category.entity';
 
 @Entity()
 export class Project {
-  @PrimaryGeneratedColumn('uuid')
+  @PrimaryGeneratedColumn('uuid')  //自增的组主键
   id: string;    //id
 
   @Column()
