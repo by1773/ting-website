@@ -4,7 +4,7 @@
  * @Author: by1773
  * @Date: 2020-03-31 17:32:55
  * @LastEditors: by1773
- * @LastEditTime: 2020-04-15 16:18:35
+ * @LastEditTime: 2020-05-20 17:24:07
  */
 import axios from 'axios';
 import { message } from 'antd';
@@ -14,7 +14,7 @@ export const httpProvider = axios.create({
   baseURL:
     process.env.NODE_ENV === 'development'
       ? 'http://localhost:4000/api'
-      : 'http://localhost/:3000/api',
+      : 'https://api.art-alive.cn/api',
   timeout: 20000,
 });
 
