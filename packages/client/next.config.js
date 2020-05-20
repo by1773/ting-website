@@ -4,7 +4,7 @@
  * @Author: by1773
  * @Date: 2020-03-31 17:32:55
  * @LastEditors: by1773
- * @LastEditTime: 2020-05-18 12:52:35
+ * @LastEditTime: 2020-05-20 10:14:56
  */
 const fs = require('fs');
 const path = require('path');
@@ -28,7 +28,7 @@ if (typeof require !== 'undefined') {
 const isProd = process.env.NODE_ENV === 'production';
 
 const nextConfig = {
-  assetPrefix: isProd ? 'https://art-alive.cn' : '/',
+  assetPrefix: isProd ? 'https://www.art-alive.cn' : '/',
   webpack: (config) => {
     config.resolve.plugins.push(new TsconfigPathsPlugin());
     config.plugins.push(
