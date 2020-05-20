@@ -1,5 +1,5 @@
 # 引用镜像
-FROM node:10.15.0
+FROM node:latest
 # 作者 wohsi hnjdshnjn
 MAINTAINER yb
 
