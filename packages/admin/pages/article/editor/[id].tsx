@@ -158,6 +158,7 @@ const Editor: NextPage<IProps> = ({ id }) => {
         }}
       />
       <ArticleSettingDrawer
+      type={ `0`}
         article={article}
         visible={settingDrawerVisible}
         onClose={() => setSettingDrawerVisible(false)}
