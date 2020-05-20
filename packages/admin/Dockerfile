@@ -10,7 +10,7 @@ ADD ./  /admin
 # 执行镜像的工作目录
 WORKDIR /admin
 
-RUN npm cache clean
+# RUN npm cache clean
 RUN npm install --registry https://registry.npm.taobao.org 
 RUN npm run build
 # 配置系统变量，指定端口
