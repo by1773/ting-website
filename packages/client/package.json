@@ -19,7 +19,7 @@
     "dayjs": "^1.8.19",
     "echarts": "^4.6.0",
     "echarts-for-react": "^2.0.15-beta.1",
-    "highlight.js": "^9.18.1",
+    "highlight.js": "^10.1.2",
     "mime-types": "^2.1.26",
     "next": "9.2.1",
     "next-page-transitions": "^1.0.0-beta.2",
