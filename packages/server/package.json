@@ -53,7 +53,7 @@
     "swagger-ui-express": "^4.1.4",
     "trim-html": "^0.1.9",
     "typeorm": "^0.2.22",
-    "ua-parser-js": "^0.7.21"
+    "ua-parser-js": "^0.7.24"
   },
   "devDependencies": {
     "@nestjs/cli": "^6.9.0",
