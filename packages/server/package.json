@@ -52,7 +52,7 @@
     "rxjs": "^6.5.3",
     "swagger-ui-express": "^4.1.4",
     "trim-html": "^0.1.9",
-    "typeorm": "^0.2.22",
+    "typeorm": "^0.2.25",
     "ua-parser-js": "^0.7.21"
   },
   "devDependencies": {
