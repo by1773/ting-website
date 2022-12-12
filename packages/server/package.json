@@ -26,7 +26,7 @@
     "@nestjs/jwt": "^6.1.1",
     "@nestjs/microservices": "^6.10.14",
     "@nestjs/passport": "^6.1.1",
-    "@nestjs/platform-express": "^6.11.5",
+    "@nestjs/platform-express": "^9.2.1",
     "@nestjs/swagger": "^4.5.1",
     "@nestjs/typeorm": "^6.2.0",
     "ali-oss": "^6.5.1",
